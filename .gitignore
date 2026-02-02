@@ -1,0 +1,18 @@
+.vscode/
+
+#frontend
+project_ecommerce/node_modules/
+project_ecommerce/dist/
+project_ecommerce/.env
+project_ecommerce/.env.*
+
+
+**/__pycache__/
+*.py[cod]
+*.pyo
+*.pyd
+Backend/project_ecommerce/.env
+Backend/project_ecommerce/media/
+
+# Virtual environment
+Backend/ecommerce_env/
