@@ -33,7 +33,7 @@ const LoginPage = () => {
         try {
             if (isLogin) {
                 const response = await axios.post(
-                    "http://127.0.0.1:8000/login/",
+                    "http://127.0.0.1:8000/snapMart/login/",
                     {
                         username: formData.username,
                         password: formData.password
@@ -51,11 +51,11 @@ const LoginPage = () => {
                 ] = `Bearer ${access}`;
 
 
-                window.location.href = "/home";
+                window.location.href = "/snapMart/home";
             } else {
 
                 const response = await axios.post(
-                    "http://127.0.0.1:8000/register/",
+                    "http://127.0.0.1:8000/snapMart/register/",
                     {
                         username: formData.username,
                         email: formData.email,

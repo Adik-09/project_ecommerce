@@ -1,5 +1,5 @@
 from django.urls import path
-from .views import ProductAPI,UserAPI
+from .views import ProductAPI,UserAPI,AddressAPI
 from django.conf import settings
 from django.conf.urls.static import static
 
@@ -8,6 +8,7 @@ urlpatterns = [
     path('product/API/<uuid:id>/',ProductAPI.as_view(),name='product_api_id'),
     path('user/API/', UserAPI.as_view(),name='user_api'),
     path('user/API/<uuid:id>/',UserAPI.as_view(),name='user_api_id'),
+    path('snapmart/addresses/',AddressAPI.as_view(),name='address_api'),
 ]
 
 if settings.DEBUG:

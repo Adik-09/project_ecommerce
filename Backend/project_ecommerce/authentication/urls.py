@@ -3,8 +3,8 @@ from rest_framework_simplejwt.views import TokenObtainPairView, TokenRefreshView
 from .views import *
 
 urlpatterns = [
-    path("login/", TokenObtainPairView.as_view(), name="token_obtain_pair"),
+    path("snapMart/login/", TokenObtainPairView.as_view(), name="token_obtain_pair"),
     path("token/refresh/", TokenRefreshView.as_view(), name="token_refresh"),
-    path("register/",user_register),
-    path("user/me/", UserMeAPI.as_view()),
+    path("snapMart/register/",user_register),
+    path("snapMart/user/me/", UserMeAPI.as_view()),
 ]

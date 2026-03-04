@@ -4,9 +4,10 @@ from rest_framework import status
 from django.shortcuts import get_object_or_404
 from django.utils.decorators import method_decorator
 from django.views.decorators.csrf import csrf_exempt
+from rest_framework.permissions import IsAuthenticated
 
-from .models import userData,Product
-from .serializers import userSerializer,productSerializer 
+from .models import userData,Product,UserAddress
+from .serializers import userSerializer,productSerializer,addressSerializer 
 
 @method_decorator(csrf_exempt, name='dispatch')
 class ProductAPI(APIView):
@@ -126,3 +127,19 @@ class UserAPI(APIView):
             serializer.errors,
             status=status.HTTP_400_BAD_REQUEST
         )
+
+class AddressAPI(APIView):
+    permission_classes = [IsAuthenticated]
+
+    def get(self, request):
+        addresses = UserAddress.objects.filter(user=request.user)
+        serializer = addressSerializer(addresses, many=True)
+        return Response(serializer.data, status=status.HTTP_200_OK)
+
+    def post(self, request):
+        serializer = addressSerializer(data=request.data)
+        if serializer.is_valid():
+            serializer.save(user=request.user)
+            return Response(serializer.data, status=status.HTTP_201_CREATED)
+
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)

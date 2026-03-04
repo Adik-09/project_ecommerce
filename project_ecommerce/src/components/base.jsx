@@ -3,12 +3,10 @@ import { motion } from 'framer-motion';
 import { ShoppingCart, Facebook, Twitter, Instagram, Linkedin } from 'lucide-react';
 import { Outlet, useNavigate, useLocation } from 'react-router-dom';
 
-
 const Base = () => {
     const [scrolled, setScrolled] = useState(false);
     const navigate = useNavigate();
     const location = useLocation();
-    const [activeIndex, setActiveIndex] = useState(0);
 
     useEffect(() => {
         const handleScroll = () => {
@@ -19,13 +17,13 @@ const Base = () => {
     }, []);
 
     const navItems = [
-        { name: 'Home', path: '/' },
-        { name: 'Explore', path: '/explore' },
-        { name: 'Cart', path: '/cart' },
-        { name: 'About Us', path: '/about' }
+        { name: "Home", path: "/snapMart/home/" },
+        { name: "Orders", path: "/snapMart/orders/" },
+        { name: "Cart", path: "/snapMart/myCart/" },
+        { name: "About Us", path: "/snapMart/about/" }
     ];
 
-    const isActive = (path) => location.pathname === path;
+    const isActive = (path) => location.pathname.startsWith(path);
 
     return (
         <div className="min-h-screen relative overflow-hidden">
@@ -34,7 +32,7 @@ const Base = () => {
             <div
                 className="fixed inset-0 z-0 scale-100"
                 style={{
-                    backgroundImage: "url('/images/bg.avif')",
+                    backgroundImage: "url('/images/bg.jpeg')",
                     backgroundSize: 'cover',
                     backgroundPosition: 'center',
                     backgroundRepeat: 'no-repeat',
@@ -72,7 +70,7 @@ const Base = () => {
                             <motion.div
                                 whileHover={{ scale: 1.05 }}
                                 whileTap={{ scale: 0.97 }}
-                                onClick={() => navigate('/')}
+                                onClick={() => navigate('/snapMart/home/')}
                                 className="flex items-center gap-2 cursor-pointer"
                             >
                                 <div className="w-9 h-9 rounded-xl bg-gradient-to-br from-gray-700 to-gray-900 flex items-center justify-center shadow-lg">
@@ -85,18 +83,16 @@ const Base = () => {
 
                             {/* Nav Links */}
                             <nav className="flex gap-3">
-                                {navItems.map((item, index) => (
+                                {navItems.map((item) => (
                                     <motion.button
                                         key={item.name}
-                                        onClick={() => {
-                                            setActiveIndex(index); 
-                                        }}
+                                        onClick={() => navigate(item.path)}
                                         whileHover={{ y: -4 }}
                                         whileTap={{ scale: 0.94 }}
                                         className="relative px-8 md:px-9 py-3 text-lg md:text-xl font-semibold"
                                     >
-                                        {/* Glass Pill (PURE CLICK BASED) */}
-                                        {activeIndex === index && (
+                                        {/* Active Glass Pill */}
+                                        {isActive(item.path) && (
                                             <motion.div
                                                 layoutId="nav-pill"
                                                 className="absolute inset-0 rounded-full backdrop-blur-3xl bg-white/90 border border-white/80"
@@ -114,16 +110,16 @@ const Base = () => {
 
                                         {/* Label */}
                                         <span
-                                            className={`relative z-10 tracking-wide transition-colors drop-shadow-[0_1px_1px_rgba(255,255,255,0.4)] ${activeIndex === index
-                                                    ? 'text-black'
-                                                    : 'text-gray-800 hover:text-black'
+                                            className={`relative z-10 tracking-wide transition-colors drop-shadow-[0_1px_1px_rgba(255,255,255,0.4)] ${isActive(item.path)
+                                                ? 'text-black'
+                                                : 'text-gray-800 hover:text-black'
                                                 }`}
                                         >
                                             {item.name}
                                         </span>
 
-                                        {/* Hover underline (inactive only) */}
-                                        {activeIndex !== index && (
+                                        {/* Hover underline */}
+                                        {!isActive(item.path) && (
                                             <motion.div
                                                 className="absolute bottom-1 left-1/2 h-[2px] rounded-full bg-gradient-to-r from-gray-400 to-gray-700"
                                                 initial={{ width: 0, x: '-50%' }}
@@ -135,12 +131,11 @@ const Base = () => {
                                 ))}
                             </nav>
 
-
                             {/* Profile */}
-                            <motion.button  
+                            <motion.button
                                 whileHover={{ scale: 1.08, y: -2 }}
                                 whileTap={{ scale: 0.95 }}
-                                onClick={() => navigate('/profile')}
+                                onClick={() => navigate('/snapMart/profile/')}
                                 className="flex items-center gap-2 px-4 py-2 rounded-full bg-white/70 backdrop-blur-2xl border border-white/90 shadow-lg"
                             >
                                 <div className="w-8 h-8 rounded-full bg-gradient-to-br from-gray-600 to-gray-900 flex items-center justify-center text-white text-sm font-bold">
