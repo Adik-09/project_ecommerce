@@ -313,6 +313,6 @@ VITE_RAZORPAY_KEY_ID=your-razorpay-key-id
 
 <div align="center">
 
-**Built with ❤️ by [Adik-09](https://github.com/Adik-09)**
+**Built with ❤️ by [Aditya Kasture](https://github.com/Adik-09)**
 
 </div>
